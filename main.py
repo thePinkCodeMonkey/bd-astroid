@@ -4,6 +4,8 @@
 import pygame
 from constants import *
 from player import *
+from asteriod import Asteroid
+from asteriodfield import AsteroidField
 
 def main():
     FPS = 60
@@ -17,10 +19,15 @@ def main():
     # create containers
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
+
+    asteroid_field = AsteroidField()
 
     # end of initialization
 
@@ -32,7 +39,6 @@ def main():
         updatable.update(dt)
 
         screen.fill((0, 0, 0))
-        print(drawable.__len__)
         for sprite in drawable:
             sprite.draw(screen)
 
